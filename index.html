@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Brew — Prototipo</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ============================================
+       SCREEN: HOME
+  ============================================ -->
+  <div class="screen active" id="screen-home">
+    <div class="screen-content">
+
+      <div class="home-header">
+        <img src="cafe-manos.jpg" alt="">
+        <div class="home-header-content">
+          <h1 class="h2">Buenos días</h1>
+          <p class="body-md">¿Qué café quieres preparar hoy?</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <button class="btn btn-primary btn-md btn-full" onclick="startNewPrep()">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><path d="M8 18V10H0V8H8V0H10V8H18V10H10V18H8Z"/></svg>
+          Nueva Preparación
+        </button>
+      </div>
+
+      <div class="section">
+        <p class="section-title">Favoritos</p>
+        <div class="chip-row" id="favorites-row">
+          <button class="chip">V60 · Dulce</button>
+          <button class="chip">Aeropress · Intenso</button>
+          <button class="chip">Prensa Francesa</button>
+          <button class="chip chip-action">Ver todos...</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <p class="section-title">Preparaciones recientes</p>
+        <div class="chip-row" id="recent-row">
+          <span class="caption" style="color:var(--neutral-500)">Aún no tienes preparaciones guardadas</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bottom-nav">
+      <button class="bnav-item active">
+        <svg width="22" height="22" viewBox="25 20 25 28" fill="currentColor"><path d="M28.125 44.8889H32.8125V35.5556H42.1875V44.8889H46.875V30.8889L37.5 23.8889L28.125 30.8889V44.8889ZM25 48V29.3333L37.5 20L50 29.3333V48H39.0625V38.6667H35.9375V48H25Z"/></svg>
+        <span>Home</span>
+      </button>
+      <button class="bnav-item">
+        <svg width="22" height="22" viewBox="83 22 27 25" fill="currentColor"><path d="M99.1105 29.6136C98.41 25.2451 95.1329 22 91.1303 22C86.6524 22 83 26.1937 83 31.361C83 36.5282 86.3397 40.3475 90.5424 40.6845C90.7801 42.2946 91.4805 43.7424 92.5937 44.8657C94.0322 46.301 95.9584 47 97.9723 47C100.411 47 102.976 45.9765 104.977 43.9795C108.629 40.335 109.029 34.7933 105.865 31.6231C104.151 29.9131 101.65 29.2142 99.098 29.6136H99.1105ZM103.776 33.1208C103.551 33.1583 103.313 33.1707 103.026 33.1832C102.037 33.2207 100.699 33.2706 99.3857 34.5811C98.0848 35.8792 98.0223 37.2272 97.9848 38.2132C97.9472 39.0494 97.9347 39.5612 97.3218 40.1727C96.7089 40.7843 96.1961 40.8093 95.358 40.8342C94.7577 40.8592 94.0197 40.8967 93.2442 41.2087C93.0691 40.6595 92.9565 40.0854 92.9565 39.4613C92.9565 37.6141 93.807 35.7294 95.258 34.2816C96.1362 33.3948 97.2119 32.7277 98.3975 32.3345C99.0835 32.1073 99.8011 31.9893 100.524 31.985C101.762 31.985 102.888 32.3844 103.776 33.1208ZM96.6964 30.3125L96.5964 30.3625C96.4963 30.3999 96.4087 30.4623 96.3087 30.4998C96.071 30.6121 95.8334 30.7369 95.6082 30.8742C95.4956 30.9366 95.3956 31.0115 95.283 31.0739C95.0579 31.2112 94.8452 31.3734 94.6326 31.5232C94.545 31.5981 94.445 31.6605 94.3574 31.7354C94.0572 31.9725 93.782 32.2222 93.5068 32.4968C93.4818 32.5217 93.4568 32.5592 93.4193 32.5841C93.1066 31.6355 92.5312 30.999 92.0684 30.4873C91.493 29.8632 91.1553 29.4888 91.1553 28.6276C91.1553 27.7664 91.5055 27.3919 92.0684 26.7678C92.4812 26.331 92.969 25.7818 93.2942 25.008C95.0704 25.9191 96.3962 27.8912 96.6964 30.2751V30.3125ZM85.5141 31.361C85.5141 27.7539 87.8156 24.7833 90.7175 24.5212C90.5799 24.7084 90.4173 24.8957 90.2297 25.1078C89.5668 25.8318 88.6412 26.8178 88.6412 28.6525C88.6412 30.4873 89.5543 31.4858 90.2297 32.2097C90.8051 32.8337 91.1428 33.2082 91.1428 34.0694C91.1428 34.9306 90.7926 35.305 90.2297 35.9291C89.8169 36.366 89.3291 36.9151 89.0039 37.6765C86.9651 36.6405 85.5266 34.2192 85.5266 31.361H85.5141ZM103.226 42.2197C100.674 44.7659 96.9591 45.2277 94.7201 43.3804C94.9453 43.3555 95.1829 43.3305 95.4581 43.318C96.4463 43.2806 97.7846 43.2307 99.098 41.9201C100.399 40.6221 100.461 39.2741 100.499 38.2881C100.536 37.4393 100.549 36.9401 101.162 36.3285C101.775 35.7169 102.288 35.692 103.126 35.667C103.726 35.642 104.476 35.6171 105.264 35.2926C105.965 37.4643 105.252 40.2102 103.226 42.2197Z"/></svg>
+        <span>Cafés</span>
+      </button>
+      <button class="bnav-item">
+        <svg width="22" height="22" viewBox="144 21 25 25" fill="currentColor"><path fill-rule="evenodd" d="M166.624 22.9992L165.871 24.5292C166.517 24.7275 167.089 25.0718 167.565 25.5397C168.533 26.4913 168.975 27.8221 168.999 29.0811C169.023 30.3454 168.631 31.7017 167.718 32.7377C166.77 33.8136 165.351 34.4367 163.6 34.3206L163.786 31.5482C164.715 31.6098 165.272 31.2987 165.617 30.9067C165.998 30.4747 166.22 29.8269 166.207 29.134C166.193 28.4359 165.945 27.8531 165.601 27.5145C165.388 27.3055 165.078 27.1276 164.601 27.113L160.202 36.0621L161.353 36.7728L164.945 43.9953L163.693 46H146.931L145.679 43.9953L149.271 36.7728L150.419 36.0621L144 22.9992L145.255 21H165.369L166.624 22.9992ZM149.181 43.2222H161.443L159.234 38.7775H151.39L149.181 43.2222ZM153.226 35.445H157.398L163.132 23.7778H147.492L153.226 35.445Z"/></svg>
+        <span>Métodos</span>
+      </button>
+      <button class="bnav-item">
+        <svg width="22" height="22" viewBox="206 20 26 28" fill="currentColor"><path d="M210.667 48C209.509 48 208.525 47.5917 207.715 46.775C206.905 45.9583 206.5 44.9667 206.5 43.8V24.2C206.5 23.0333 206.905 22.0417 207.715 21.225C208.525 20.4083 209.509 20 210.667 20H225.944V42.4H210.667C210.273 42.4 209.944 42.5344 209.678 42.8032C209.412 43.072 209.279 43.4043 209.278 43.8C209.277 44.1957 209.41 44.5285 209.678 44.7982C209.945 45.0679 210.275 45.2019 210.667 45.2H228.722V22.8H231.5V48H210.667ZM214.833 39.6H223.167V22.8H214.833V39.6ZM212.056 39.6V22.8H210.667C210.273 22.8 209.944 22.9344 209.678 23.2032C209.412 23.472 209.279 23.8043 209.278 24.2V39.845C209.509 39.775 209.735 39.7167 209.956 39.67C210.176 39.6233 210.413 39.6 210.667 39.6H212.056Z"/></svg>
+        <span>Historial</span>
+      </button>
+      <button class="bnav-item">
+        <svg width="22" height="22" viewBox="266 21 25 25" fill="currentColor"><path d="M274.086 31.6641C272.862 30.4401 272.25 28.9688 272.25 27.25C272.25 25.5312 272.862 24.0599 274.086 22.8359C275.31 21.612 276.781 21 278.5 21C280.219 21 281.69 21.612 282.914 22.8359C284.138 24.0599 284.75 25.5312 284.75 27.25C284.75 28.9688 284.138 30.4401 282.914 31.6641C281.69 32.888 280.219 33.5 278.5 33.5C276.781 33.5 275.31 32.888 274.086 31.6641ZM266 46V41.625C266 40.7396 266.228 39.926 266.684 39.1844C267.141 38.4427 267.746 37.876 268.5 37.4844C270.115 36.6771 271.755 36.0719 273.422 35.6687C275.089 35.2656 276.781 35.0635 278.5 35.0625C280.219 35.0615 281.911 35.2635 283.578 35.6687C285.245 36.074 286.885 36.6792 288.5 37.4844C289.255 37.875 289.861 38.4417 290.317 39.1844C290.773 39.9271 291.001 40.7406 291 41.625V46H266ZM269.125 42.875H287.875V41.625C287.875 41.3385 287.804 41.0781 287.661 40.8438C287.518 40.6094 287.329 40.4271 287.094 40.2969C285.687 39.5938 284.268 39.0667 282.836 38.7156C281.404 38.3646 279.958 38.1885 278.5 38.1875C277.042 38.1865 275.596 38.3625 274.164 38.7156C272.732 39.0688 271.312 39.5958 269.906 40.2969C269.672 40.4271 269.483 40.6094 269.339 40.8438C269.195 41.0781 269.124 41.3385 269.125 41.625V42.875ZM280.708 29.4578C281.319 28.8453 281.625 28.1094 281.625 27.25C281.625 26.3906 281.319 25.6552 280.708 25.0437C280.096 24.4323 279.36 24.126 278.5 24.125C277.64 24.124 276.904 24.4302 276.294 25.0437C275.683 25.6573 275.377 26.3927 275.375 27.25C275.373 28.1073 275.679 28.8432 276.294 29.4578C276.908 30.0724 277.644 30.3781 278.5 30.375C279.356 30.3719 280.092 30.0661 280.708 29.4578Z"/></svg>
+        <span>Perfil</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SCREEN: NUEVA PREPARACIÓN
+  ============================================ -->
+  <div class="screen" id="screen-new-prep">
+    <div class="top-nav simple">
+      <div class="top-nav-side">
+        <button class="btn-icon no-border" onclick="goTo('screen-home')" aria-label="Volver">
+          <svg width="22" height="22" viewBox="0 0 28 28" fill="currentColor"><path d="M6.69375 15.75L16.4937 25.55L14 28L0 14L14 0L16.4937 2.45L6.69375 12.25H28V15.75H6.69375Z"/></svg>
+        </button>
+      </div>
+      <div class="top-nav-center"><span class="top-nav-title">Nueva Preparación</span></div>
+      <div class="top-nav-side right"></div>
+    </div>
+
+    <div class="screen-content">
+      <div class="field-group" style="margin-bottom:var(--space-4); position:relative;">
+        <label class="field-label">Café</label>
+        <button class="dropdown-trigger" id="cafe-trigger" onclick="toggleDropdown('cafe')">
+          <span class="placeholder-text" id="cafe-trigger-text">Selecciona un café</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="dropdown-menu" id="cafe-menu">
+          <div class="dropdown-search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Buscar" oninput="filterOptions(this, 'cafe-menu')">
+          </div>
+          <button class="dropdown-add" onclick="event.stopPropagation(); alert('Esto abriría el formulario para crear un nuevo café')">
+            <svg width="16" height="16" viewBox="0 0 18 18" fill="currentColor"><path d="M8 18V10H0V8H8V0H10V8H18V10H10V18H8Z"/></svg>
+            Crear café...
+          </button>
+          <hr class="dropdown-divider">
+          <button class="dropdown-option" onclick="selectOption('cafe', 'Colombia')">Colombia</button>
+          <button class="dropdown-option" onclick="selectOption('cafe', 'Red Burbon')">Red Burbon</button>
+          <button class="dropdown-option" onclick="selectOption('cafe', 'Perú')">Perú</button>
+          <button class="dropdown-option" onclick="selectOption('cafe', 'Etiopía')">Etiopía</button>
+        </div>
+      </div>
+
+      <div class="field-group" style="margin-bottom:var(--space-4); position:relative;">
+        <label class="field-label">Método</label>
+        <button class="dropdown-trigger" id="metodo-trigger" onclick="toggleDropdown('metodo')">
+          <span class="placeholder-text" id="metodo-trigger-text">Selecciona un método</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="dropdown-menu" id="metodo-menu">
+          <div class="dropdown-search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Buscar" oninput="filterOptions(this, 'metodo-menu')">
+          </div>
+          <button class="dropdown-add" onclick="event.stopPropagation(); alert('Esto abriría el formulario para agregar un nuevo método')">
+            <svg width="16" height="16" viewBox="0 0 18 18" fill="currentColor"><path d="M8 18V10H0V8H8V0H10V8H18V10H10V18H8Z"/></svg>
+            Agregar método...
+          </button>
+          <hr class="dropdown-divider">
+          <button class="dropdown-option" onclick="selectOption('metodo', 'V60')">V60</button>
+          <button class="dropdown-option" onclick="selectOption('metodo', 'Aeropress')">Aeropress</button>
+          <button class="dropdown-option" onclick="selectOption('metodo', 'Prensa Francesa')">Prensa Francesa</button>
+          <button class="dropdown-option" onclick="selectOption('metodo', 'Chemex')">Chemex</button>
+        </div>
+      </div>
+
+      <div class="suggested-recipe-card" id="suggested-recipe" style="display:none;">
+        <div class="suggested-recipe-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/><path d="M19 16l.75 2.25L22 19l-2.25.75L19 22l-.75-2.25L16 19l2.25-.75L19 16z"/></svg>
+          Receta sugerida
+        </div>
+        <div class="suggested-recipe-body">
+          <div class="method-name" id="suggested-method-name">V60</div>
+          <div class="recipe-specs">16gr / 230gr / 90°C</div>
+        </div>
+        <div class="suggested-recipe-actions">
+          <button class="btn btn-ghost btn-sm" onclick="dismissRecipe()">Omitir</button>
+          <button class="btn btn-secondary btn-sm" onclick="useRecipe()">Usar receta</button>
+        </div>
+      </div>
+
+      <p class="h3" style="font-size:20px; margin: var(--space-5) 0 var(--space-4);">Parámetros</p>
+
+      <div class="grid-2" style="margin-bottom:var(--space-3);">
+        <div class="field-group">
+          <label class="field-label">Café (gr)</label>
+          <input type="number" inputmode="decimal" class="input-field" id="param-cafe" placeholder="15" value="15">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Agua (gr)</label>
+          <input type="number" inputmode="decimal" class="input-field" id="param-agua" placeholder="225" value="225">
+        </div>
+      </div>
+      <div class="grid-2" style="margin-bottom:var(--space-3);">
+        <div class="field-group">
+          <label class="field-label">Ratio</label>
+          <input type="text" class="input-field" id="param-ratio" placeholder="1:15" value="1:15">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Temperatura °C</label>
+          <input type="number" inputmode="decimal" class="input-field" id="param-temp" placeholder="91" value="91">
+        </div>
+      </div>
+      <div class="field-group" style="position:relative; margin-bottom:var(--space-4);">
+        <label class="field-label">Molienda</label>
+        <button class="dropdown-trigger" id="molienda-trigger" onclick="toggleDropdown('molienda')">
+          <span id="molienda-trigger-text" class="placeholder-text">Selecciona molienda</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="dropdown-menu" id="molienda-menu">
+          <button class="dropdown-option" onclick="selectOption('molienda', 'Fina')">Fina</button>
+          <button class="dropdown-option" onclick="selectOption('molienda', 'Media')">Media</button>
+          <button class="dropdown-option" onclick="selectOption('molienda', 'Gruesa')">Gruesa</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="actions-footer">
+      <button class="btn btn-primary btn-md btn-full" id="comenzar-btn" disabled onclick="comenzarPreparacion()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M10 8.64L15.27 12L10 15.36V8.64ZM8 5V19L19 12L8 5Z"/></svg>
+        Comenzar preparación
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SCREEN: TIMER
+  ============================================ -->
+  <div class="screen" id="screen-timer">
+    <div class="top-nav">
+      <div class="top-nav-side">
+        <button class="btn-icon no-border" onclick="confirmLeaveTimer()" aria-label="Volver">
+          <svg width="22" height="22" viewBox="0 0 28 28" fill="currentColor"><path d="M6.69375 15.75L16.4937 25.55L14 28L0 14L14 0L16.4937 2.45L6.69375 12.25H28V15.75H6.69375Z"/></svg>
+        </button>
+      </div>
+      <div class="top-nav-center">
+        <div class="top-nav-title">Preparación</div>
+        <div class="top-nav-subtitle" id="timer-subtitle">Colombia · V60</div>
+      </div>
+      <div class="top-nav-side right"></div>
+    </div>
+
+    <div class="screen-content">
+      <div class="field-group" style="margin-bottom:var(--space-5); flex-direction:row; align-items:center; justify-content:space-between;">
+        <label class="field-label-prompt" style="margin:0;">¿Harás Blooming?</label>
+        <div class="segmented" id="blooming-segmented">
+          <button class="segmented-option selected" onclick="setBlooming(true)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            Sí
+          </button>
+          <button class="segmented-option" onclick="setBlooming(false)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            No
+          </button>
+        </div>
+      </div>
+
+      <div style="text-align:center; padding: var(--space-4) 0 var(--space-5);">
+        <div class="timer-display" id="timer-display">00:00</div>
+      </div>
+
+      <div class="section">
+        <p class="section-title">Eventos</p>
+        <div id="event-list"></div>
+      </div>
+    </div>
+
+    <div class="actions-footer">
+      <button class="btn btn-primary btn-md btn-full" id="timer-main-btn" onclick="timerMainAction()">
+        <svg width="16" height="16" viewBox="0 0 18 21" fill="currentColor"><path d="M6 2V0H12V2H6ZM5.512 20.288C4.42067 19.8127 3.46667 19.1667 2.65 18.35C1.83333 17.5333 1.18767 16.579 0.713001 15.487C0.238335 14.395 0.000668065 13.2327 1.3986e-06 12C-0.000665268 10.7673 0.237001 9.60467 0.713001 8.512C1.189 7.41933 1.83467 6.46533 2.65 5.65C3.46533 4.83467 4.41967 4.189 5.513 3.713C6.60633 3.237 7.76867 2.99933 9 3C10.0333 3 11.025 3.16667 11.975 3.5C12.925 3.83333 13.8167 4.31667 14.65 4.95L16.05 3.55L17.45 4.95L16.05 6.35C16.6833 7.18333 17.1667 8.075 17.5 9.025C17.8333 9.975 18 10.9667 18 12C18 13.2333 17.7623 14.396 17.287 15.488C16.8117 16.58 16.166 17.534 15.35 18.35C14.534 19.166 13.5797 19.812 12.487 20.288C11.3943 20.764 10.232 21.0013 9 21C7.768 20.9987 6.60533 20.7613 5.512 20.288ZM13.95 16.95C15.3167 15.5833 16 13.9333 16 12C16 10.0667 15.3167 8.41667 13.95 7.05C12.5833 5.68333 10.9333 5 9 5C7.06667 5 5.41667 5.68333 4.05 7.05C2.68333 8.41667 2 10.0667 2 12C2 13.9333 2.68333 15.5833 4.05 16.95C5.41667 18.3167 7.06667 19 9 19C10.9333 19 12.5833 18.3167 13.95 16.95ZM7 16L13 12L7 8V16Z"/></svg>
+        Iniciar Cronómetro
+      </button>
+      <button class="btn btn-ghost btn-md btn-full" id="timer-finish-btn" onclick="finalizarPreparacion()">
+        <svg width="16" height="16" viewBox="0 0 18 21" fill="currentColor"><path d="M6 2V0H12V2H6ZM5.512 20.288C4.42067 19.8127 3.46667 19.1667 2.65 18.35C1.83333 17.5333 1.18767 16.579 0.713001 15.487C0.238335 14.395 0.000668065 13.2327 1.3986e-06 12C-0.000665268 10.7673 0.237001 9.60467 0.713001 8.512C1.189 7.41933 1.83467 6.46533 2.65 5.65C3.46533 4.83467 4.41967 4.189 5.513 3.713C6.60633 3.237 7.76867 2.99933 9 3C10.0333 3 11.025 3.16667 11.975 3.5C12.925 3.83333 13.8167 4.31667 14.65 4.95L16.05 3.55L17.45 4.95L16.05 6.35C16.6833 7.18333 17.1667 8.075 17.5 9.025C17.8333 9.975 18 10.9667 18 12C18 13.2333 17.7623 14.396 17.287 15.488C16.8117 16.58 16.166 17.534 15.35 18.35C14.534 19.166 13.5797 19.812 12.487 20.288C11.3943 20.764 10.232 21.0013 9 21C7.768 20.9987 6.60533 20.7613 5.512 20.288ZM13.95 16.95C15.3167 15.5833 16 13.9333 16 12C16 10.0667 15.3167 8.41667 13.95 7.05C12.5833 5.68333 10.9333 5 9 5C7.06667 5 5.41667 5.68333 4.05 7.05C2.68333 8.41667 2 10.0667 2 12C2 13.9333 2.68333 15.5833 4.05 16.95C5.41667 18.3167 7.06667 19 9 19C10.9333 19 12.5833 18.3167 13.95 16.95ZM5.525 15.5H12.5L12.525 8.5H5.525V15.5Z"/></svg>
+        <span id="timer-finish-label">Finalizar Preparación</span>
+        <div class="btn-spinner" style="border-color:var(--neutral-700); border-top-color:transparent;"></div>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SCREEN: REVIEW
+  ============================================ -->
+  <div class="screen" id="screen-review">
+    <div class="top-nav simple">
+      <div class="top-nav-side">
+        <button class="btn-icon no-border" onclick="goTo('screen-home')" aria-label="Volver">
+          <svg width="22" height="22" viewBox="0 0 28 28" fill="currentColor"><path d="M6.69375 15.75L16.4937 25.55L14 28L0 14L14 0L16.4937 2.45L6.69375 12.25H28V15.75H6.69375Z"/></svg>
+        </button>
+      </div>
+      <div class="top-nav-center"><span class="top-nav-title">Review</span></div>
+      <div class="top-nav-side right"></div>
+    </div>
+
+    <div class="screen-content">
+      <div class="review-header">
+        <div class="review-header-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2V4M14 2V4M16 8C16.2652 8 16.5196 8.10536 16.7071 8.29289C16.8946 8.48043 17 8.73478 17 9V17C17 18.0609 16.5786 19.0783 15.8284 19.8284C15.0783 20.5786 14.0609 21 13 21H7C5.93913 21 4.92172 20.5786 4.17157 19.8284C3.42143 19.0783 3 18.0609 3 17V9C3 8.73478 3.10536 8.48043 3.29289 8.29289C3.48043 8.10536 3.73478 8 4 8H18C19.0609 8 20.0783 8.42143 20.8284 9.17157C21.5786 9.92172 22 10.9391 22 12C22 13.0609 21.5786 14.0783 20.8284 14.8284C20.0783 15.5786 19.0609 16 18 16H17M6 2V4"/></svg>
+          <span id="review-title">Colombia · V60</span>
+        </div>
+        <div class="review-header-stats">
+          <span id="review-total-time">Tiempo total: 00:00</span>
+          <span id="review-event-count">Eventos: 0</span>
+          <span id="review-params">15gr / 225gr / 91°C</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <p class="section-title">Eventos</p>
+        <div id="review-event-list"></div>
+      </div>
+
+      <div class="section">
+        <p class="section-title" style="margin-bottom:var(--space-3);">¿Cómo quedó tu preparación?</p>
+        <div class="rating" id="review-rating"></div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Notas</label>
+        <textarea class="textarea-field" id="review-notes" placeholder="Cuéntale a tu yo futuro cómo resultó esta taza"></textarea>
+      </div>
+    </div>
+
+    <div class="actions-footer">
+      <button class="btn btn-primary btn-md btn-full" onclick="guardarPreparacion(false)">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M14.59 5.58L8 12.17L4.41 8.59L3 10L8 15L16 7L14.59 5.58ZM10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM10 18C5.58 18 2 14.42 2 10C2 5.58 5.58 2 10 2C14.42 2 18 5.58 18 10C18 14.42 14.42 18 10 18Z"/></svg>
+        Guardar Preparación
+      </button>
+      <button class="btn btn-ghost btn-md btn-full" onclick="guardarPreparacion(true)">
+        <svg width="16" height="16" viewBox="0 0 20 19" fill="currentColor" fill-rule="evenodd"><path d="M6.85 14.825L10 12.925L13.15 14.85L12.325 11.25L15.1 8.85L11.45 8.525L10 5.125L8.55 8.5L4.9 8.825L7.675 11.25L6.85 14.825ZM3.825 19L5.45 11.975L0 7.25L7.2 6.625L10 0L12.8 6.625L20 7.25L14.55 11.975L16.175 19L10 15.275L3.825 19Z"/></svg>
+        Guardar y agregar a favoritos
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SCREEN: DETALLE DE PREPARACIÓN
+  ============================================ -->
+  <div class="screen" id="screen-detail">
+    <div class="top-nav">
+      <div class="top-nav-side">
+        <button class="btn-icon no-border" onclick="goTo('screen-home')" aria-label="Cerrar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="top-nav-center">
+        <div class="top-nav-title" id="detail-title">Colombia · V60</div>
+        <div class="top-nav-rating" id="detail-rating-stars"></div>
+      </div>
+      <div class="top-nav-side right"></div>
+    </div>
+
+    <div class="screen-content">
+      <div class="info-grid section">
+        <div class="info-block">
+          <div class="label">Café</div>
+          <div class="value" id="detail-cafe-info">Nombre: Colombia<br>Tostador: Café XYZ<br>Origen: Colombia</div>
+        </div>
+        <div class="info-block">
+          <div class="label">Método</div>
+          <div class="value" id="detail-metodo-info">V60</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <p class="section-title">Parámetros</p>
+        <div id="detail-params-list"></div>
+      </div>
+
+      <div class="section">
+        <p class="section-title">Eventos</p>
+        <div id="detail-event-list"></div>
+      </div>
+
+      <div class="section">
+        <p class="section-title">Notas</p>
+        <p class="notes-readonly" id="detail-notes">—</p>
+      </div>
+    </div>
+
+    <div class="actions-footer" style="flex-direction:row;">
+      <button class="btn btn-ghost btn-md" style="flex:1;" onclick="editFromDetail()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Editar
+      </button>
+      <button class="btn btn-secondary btn-md" style="flex:1;" onclick="shareDetail()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Compartir
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toast-text">Guardado</span>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
