@@ -14,6 +14,7 @@ let timerStarted = false;
 let events = []; // {name, seconds, done}
 
 let currentRating = 0;
+let currentReviewTitle = '';
 
 const RECIPES = {
   'V60': { grams: 16, water: 230, temp: 90 },
@@ -49,7 +50,7 @@ function renderRecentChips() {
   }
   const recent = preps.slice(0, 3);
   row.innerHTML = recent.map((p, i) =>
-    `<button class="chip" onclick="openDetailById('${p.id}')">${p.cafe} · ${p.metodo}</button>`
+    `<button class="chip" onclick="openDetailById('${p.id}')">${p.title || p.cafe + ' · ' + p.metodo}</button>`
   ).join('') + '<button class="chip chip-action">Ver historial...</button>';
 }
 
@@ -110,7 +111,7 @@ function toggleDropdown(name) {
   }
 }
 
-document.addEventListener('click', function(e) {
+document.addEventListener('click', function (e) {
   if (!e.target.closest('.field-group')) {
     document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('open'));
     document.querySelectorAll('.dropdown-trigger').forEach(t => t.classList.remove('open'));
@@ -287,21 +288,38 @@ function eventRowHTML(name, time, state, editIndex) {
 // ============================================
 function timerMainAction() {
   if (!timerStarted) {
-    // Iniciar Cronómetro
-    timerStarted = true;
-    timerRunning = true;
-    elapsedSeconds = 0;
-
     const seg = document.getElementById('blooming-segmented');
     seg.classList.add('locked');
 
     const mainBtn = document.getElementById('timer-main-btn');
-    mainBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 22 18" fill="currentColor"><path d="M2.188 15.813C0.729333 14.3543 0 12.5833 0 10.5C0 8.41667 0.729333 6.646 2.188 5.188C3.64667 3.73 5.41733 3.00067 7.5 3C8.36667 3 9.18333 3.13767 9.95 3.413C10.7167 3.68833 11.4167 4.06733 12.05 4.55L13.1 3.5L14.5 4.9L13.45 5.95C13.9333 6.58333 14.3127 7.28767 14.588 8.063C14.8633 8.83833 15.0007 9.65067 15 10.5C15 12.5833 14.271 14.3543 12.813 15.813C11.355 17.2717 9.584 18.0007 7.5 18C5.416 17.9993 3.64533 17.2703 2.188 15.813ZM18.5 18L15 14.5L16.4 13.1L17.5 14.2V2H19.5V14.175L20.575 13.1L22 14.5L18.5 18ZM5 2V0H10V2H5ZM11.4 14.4C12.4667 13.3333 13 12.0333 13 10.5C13 8.96667 12.4667 7.66667 11.4 6.6C10.3333 5.53333 9.03333 5 7.5 5C5.96667 5 4.66667 5.53333 3.6 6.6C2.53333 7.66667 2 8.96667 2 10.5C2 12.0333 2.53333 13.3333 3.6 14.4C4.66667 15.4667 5.96667 16 7.5 16C9.03333 16 10.3333 15.4667 11.4 14.4ZM6.5 11.5H8.5V6.5H6.5V11.5Z"/></svg> Registrar evento`;
+    mainBtn.classList.add('is-disabled');
 
-    startInterval();
-    renderEventList();
+    const overlay = document.getElementById('countdown-overlay');
+    const countEl = document.getElementById('countdown-number');
+    let count = 3;
+    countEl.textContent = count;
+    overlay.style.display = 'flex';
+
+    const countdownId = setInterval(() => {
+      count--;
+      if (count > 0) {
+        countEl.textContent = count;
+      } else {
+        clearInterval(countdownId);
+        overlay.style.display = 'none';
+
+        timerStarted = true;
+        timerRunning = true;
+        elapsedSeconds = 0;
+
+        mainBtn.classList.remove('is-disabled');
+        mainBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 22 18" fill="currentColor"><path d="M2.188 15.813C0.729333 14.3543 0 12.5833 0 10.5C0 8.41667 0.729333 6.646 2.188 5.188C3.64667 3.73 5.41733 3.00067 7.5 3C8.36667 3 9.18333 3.13767 9.95 3.413C10.7167 3.68833 11.4167 4.06733 12.05 4.55L13.1 3.5L14.5 4.9L13.45 5.95C13.9333 6.58333 14.3127 7.28767 14.588 8.063C14.8633 8.83833 15.0007 9.65067 15 10.5C15 12.5833 14.271 14.3543 12.813 15.813C11.355 17.2717 9.584 18.0007 7.5 18C5.416 17.9993 3.64533 17.2703 2.188 15.813ZM18.5 18L15 14.5L16.4 13.1L17.5 14.2V2H19.5V14.175L20.575 13.1L22 14.5L18.5 18ZM5 2V0H10V2H5ZM11.4 14.4C12.4667 13.3333 13 12.0333 13 10.5C13 8.96667 12.4667 7.66667 11.4 6.6C10.3333 5.53333 9.03333 5 7.5 5C5.96667 5 4.66667 5.53333 3.6 6.6C2.53333 7.66667 2 8.96667 2 10.5C2 12.0333 2.53333 13.3333 3.6 14.4C4.66667 15.4667 5.96667 16 7.5 16C9.03333 16 10.3333 15.4667 11.4 14.4ZM6.5 11.5H8.5V6.5H6.5V11.5Z"/></svg> Registrar evento`;
+
+        startInterval();
+        renderEventList();
+      }
+    }, 1000);
   } else {
-    // Registrar evento
     registrarEvento();
   }
 }
@@ -368,8 +386,47 @@ function confirmLeaveTimer() {
 // ============================================
 // REVIEW SCREEN
 // ============================================
+function renderReviewTitleDisplay() {
+  const area = document.getElementById('review-title-area');
+  area.innerHTML = `
+    <span id="review-title" style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${currentReviewTitle}</span>
+    <button class="event-row-edit-btn" onclick="startEditReviewTitle()" aria-label="Editar título">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    </button>
+  `;
+}
+
+function startEditReviewTitle() {
+  const area = document.getElementById('review-title-area');
+  area.innerHTML = `
+    <input type="text" class="event-row-input review-title-input" id="rev-title-input" value="${currentReviewTitle.replace(/"/g, '&quot;')}" onkeydown="if(event.key==='Enter')confirmEditReviewTitle()">
+    <div class="event-row-edit-actions">
+      <button class="event-row-confirm" onclick="confirmEditReviewTitle()" aria-label="Confirmar">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>
+      </button>
+      <button class="event-row-cancel" onclick="cancelEditReviewTitle()" aria-label="Cancelar">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  `;
+  const input = document.getElementById('rev-title-input');
+  input.focus();
+  input.select();
+}
+
+function confirmEditReviewTitle() {
+  const newTitle = document.getElementById('rev-title-input').value.trim();
+  if (newTitle) currentReviewTitle = newTitle;
+  renderReviewTitleDisplay();
+}
+
+function cancelEditReviewTitle() {
+  renderReviewTitleDisplay();
+}
+
 function openReview() {
-  document.getElementById('review-title').textContent = `${selectedCafe} · ${selectedMetodo}`;
+  currentReviewTitle = `${selectedCafe} · ${selectedMetodo}`;
+  renderReviewTitleDisplay();
   document.getElementById('review-total-time').textContent = `Tiempo total: ${formatTime(elapsedSeconds)}`;
   document.getElementById('review-event-count').textContent = `Eventos: ${events.length}`;
 
@@ -464,8 +521,15 @@ function setRating(value) {
 // ============================================
 function guardarPreparacion(addFavorite) {
   const id = 'prep_' + Date.now();
+  const openTitleInput = document.getElementById('rev-title-input');
+  if (openTitleInput) {
+    const val = openTitleInput.value.trim();
+    if (val) currentReviewTitle = val;
+  }
+  const prepTitle = currentReviewTitle || `${selectedCafe} · ${selectedMetodo}`;
   const prep = {
     id,
+    title: prepTitle,
     cafe: selectedCafe,
     metodo: selectedMetodo,
     tostador: 'Café XYZ',
@@ -496,11 +560,11 @@ function guardarPreparacion(addFavorite) {
 // DETAIL SCREEN
 // ============================================
 function renderDetailScreen(prep) {
-  document.getElementById('detail-title').textContent = `${prep.cafe} · ${prep.metodo}`;
-  renderRating('detail-rating-stars', prep.rating, true);
+  document.getElementById('detail-title').textContent = prep.title || `${prep.cafe} · ${prep.metodo}`;
+renderRating('detail-rating-stars', prep.rating, true);
 
   document.getElementById('detail-cafe-info').innerHTML =
-    `Nombre: ${prep.cafe}<br>Tostador: ${prep.tostador}<br>Origen: ${prep.origen}`;
+    `Nombre: ${prep.cafe}<br>Tostador (Marca): ${prep.tostador}<br>Origen: ${prep.origen}`;
   document.getElementById('detail-metodo-info').textContent = prep.metodo;
 
   document.getElementById('detail-params-list').innerHTML = `

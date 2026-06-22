@@ -317,6 +317,11 @@
         </div>
       </div>
 
+      <div class="countdown-overlay" id="countdown-overlay" style="display:none;">
+        <div class="countdown-ring"></div>
+        <span class="countdown-number" id="countdown-number">3</span>
+      </div>
+
       <div class="actions-footer">
         <button class="btn btn-primary btn-md btn-full" id="timer-main-btn" onclick="timerMainAction()">
           <svg width="16" height="16" viewBox="0 0 18 21" fill="currentColor">
@@ -360,7 +365,9 @@
               <path
                 d="M10 2V4M14 2V4M16 8C16.2652 8 16.5196 8.10536 16.7071 8.29289C16.8946 8.48043 17 8.73478 17 9V17C17 18.0609 16.5786 19.0783 15.8284 19.8284C15.0783 20.5786 14.0609 21 13 21H7C5.93913 21 4.92172 20.5786 4.17157 19.8284C3.42143 19.0783 3 18.0609 3 17V9C3 8.73478 3.10536 8.48043 3.29289 8.29289C3.48043 8.10536 3.73478 8 4 8H18C19.0609 8 20.0783 8.42143 20.8284 9.17157C21.5786 9.92172 22 10.9391 22 12C22 13.0609 21.5786 14.0783 20.8284 14.8284C20.0783 15.5786 19.0609 16 18 16H17M6 2V4" />
             </svg>
-            <span id="review-title">Colombia · V60</span>
+            <div id="review-title-area" class="review-title-area">
+              <span id="review-title">Colombia · V60</span>
+            </div>
           </div>
           <div class="review-header-stats">
             <span id="review-total-time">Tiempo total: 00:00</span>
@@ -419,7 +426,7 @@
         </div>
         <div class="top-nav-center">
           <div class="top-nav-title" id="detail-title">Colombia · V60</div>
-          <div class="top-nav-rating" id="detail-rating-stars"></div>
+<div class="top-nav-rating" id="detail-rating-stars"></div>
         </div>
         <div class="top-nav-side right"></div>
       </div>
@@ -428,7 +435,8 @@
         <div class="info-grid section">
           <div class="info-block">
             <div class="label">Café</div>
-            <div class="value" id="detail-cafe-info">Nombre: Colombia<br>Tostador: Café XYZ<br>Origen: Colombia</div>
+            <div class="value" id="detail-cafe-info">Nombre: Colombia<br>Tostador (Marca): Café XYZ<br>Origen: Colombia
+            </div>
           </div>
           <div class="info-block">
             <div class="label">Método</div>
@@ -452,24 +460,33 @@
         </div>
       </div>
 
-      <div class="actions-footer" style="flex-direction:row;">
-        <button class="btn btn-ghost btn-md" style="flex:1;" onclick="editFromDetail()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-            <path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+      <div class="actions-footer">
+        <button class="btn btn-primary btn-md btn-full" onclick="goTo('screen-home')">
+          <svg width="16" height="16" viewBox="25 20 25 28" fill="currentColor">
+            <path
+              d="M28.125 44.8889H32.8125V35.5556H42.1875V44.8889H46.875V30.8889L37.5 23.8889L28.125 30.8889V44.8889ZM25 48V29.3333L37.5 20L50 29.3333V48H39.0625V38.6667H35.9375V48H25Z" />
           </svg>
-          Editar
+          Volver a inicio
         </button>
-        <button class="btn btn-secondary btn-md" style="flex:1;" onclick="shareDetail()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="18" cy="5" r="3" />
-            <circle cx="6" cy="12" r="3" />
-            <circle cx="18" cy="19" r="3" />
-            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-          </svg>
-          Compartir
-        </button>
+        <div style="display:flex; gap:var(--space-2);">
+          <button class="btn btn-ghost btn-sm" style="flex:1;" onclick="editFromDetail()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+              <path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
+            Editar
+          </button>
+          <button class="btn btn-secondary btn-sm" style="flex:1;" onclick="shareDetail()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+            </svg>
+            Compartir
+          </button>
+        </div>
       </div>
     </div>
 

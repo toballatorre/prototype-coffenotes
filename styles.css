@@ -502,6 +502,7 @@ input, textarea, select {
 .top-nav-title { font-size: 18px; font-weight: 600; color: var(--neutral-1000); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .top-nav-subtitle { font-size: 14px; color: var(--neutral-500); margin-top: 1px; }
 .top-nav-rating { display: flex; justify-content: center; margin-top: 2px; }
+.top-nav-center .rating { justify-content: center; }
 .top-nav.simple .top-nav-title { font-family: var(--font-body); font-size: 24px; letter-spacing: 0.5px; }
 
 /* ============================================
@@ -580,7 +581,7 @@ input, textarea, select {
    REVIEW HEADER
    ============================================ */
 .review-header { margin-bottom: var(--space-5); }
-.review-header-title { display: flex; align-items: center; gap: var(--space-2); color: var(--neutral-900); font-size: 16px; font-weight: 600; margin-bottom: var(--space-2); }
+.review-header-title { display: flex; align-items: center; gap: var(--space-2); color: var(--neutral-900); font-size: 16px; font-weight: 600; margin-bottom: var(--space-2); width: 100%; }
 .review-header-title svg { color: var(--neutral-700); flex-shrink: 0; }
 .review-header-stats { display: flex; flex-direction: column; gap: 2px; }
 .review-header-stats span { font-size: 14px; color: var(--neutral-600); }
@@ -642,6 +643,63 @@ input, textarea, select {
 
 .greeting-row { margin-bottom: var(--space-5); }
 .notes-readonly { font-size: 16px; color: var(--neutral-700); line-height: 1.5; }
+
+/* ============================================
+   COUNTDOWN OVERLAY
+   ============================================ */
+.countdown-overlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.countdown-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 10px solid var(--warning-light);
+  border-top-color: var(--warning-primary);
+  border-right-color: var(--warning-primary);
+  animation: spin 1s linear infinite;
+}
+
+.countdown-number {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 64px;
+  color: var(--warning-primary);
+  position: relative;
+  z-index: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   REVIEW TITLE AREA (editable)
+   ============================================ */
+.review-title-area {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+  min-width: 0;
+}
+
+.review-title-input {
+  font-size: 16px;
+  font-weight: 600;
+  background: var(--neutral-200);
+  color: var(--espresso-900, #180e0b);
+  flex: 1;
+}
 
 @media (max-width: 380px) {
   .timer-display { font-size: 54px; }
